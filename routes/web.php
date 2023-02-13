@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controller\Auth\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,11 +13,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Home Controller
 Route::get('/', function () {
     return view('welcome');
 });
 
+//Authentication
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//provider Controller Route
+
+Route::get('/auth/{provider}/redirect', [App\Http\Controllers\Auth\ProviderController::class, 'redirect' ]);
+ 
+Route::get('/auth/{provider}/callback',  [App\Http\Controllers\Auth\ProviderController::class, 'callback']);
+ 
+
